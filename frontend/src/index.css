@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: "Intel One Mono";
+  src: url("/src/assets/IntelOneMono-Regular.woff") format('woff');
+}
+
+@font-face {
+  font-family: "Intel One Mono Bold";
+  src: url("/src/assets/IntelOneMono-Bold.woff") format('woff');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Intel One Mono Light";
+  src: url("/src/assets/IntelOneMono-Light.woff") format('woff');
+  font-weight: lighter;
+}
+
+body {
+  font-family: "Intel One Mono";
+  background-color: #0F1316;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #248AFF;
+}
+
+.title {
+  /* border: 1px solid tomato; */
+  padding: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.links {
+  font-family: "Intel One Mono Bold";
+  display: flex;
+  height: fit-content;
+  width: 480px;
+  justify-content: space-between;
+  /* border: 1px solid yellow; */
+  margin-bottom: 35px;
+
+}
+
+a { text-decoration: none; }
+a:visited { text-decoration: none; color: #248AFF}
+
+#menu-title {
+  font-family: "Intel One Mono Bold";
+  text-align: center;
+  width: 150px;
+  height: fit-content;
+  position: relative;
+  background-color: #0F1316;
+  left: 35%;
+  top: -10px;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  grid-template-columns: 2101fr;
+  text-align: center;
+  border: 1px solid;
+  height: 300px;
+  width: 480px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+#commands {
+  border: solid 1px white;
+  height: fit-content;
+  width: fit-content;
+  font-family: "Intel One Mono";
+}
+
+#command-desc {
+  border: solid 1px white;
+  height: fit-content;
+  width: fit-content;
+  font-family: "Intel One Mono Light";
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  49% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
