@@ -1,19 +1,8 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
-function Menu(){
-    alert("you pressed a key!");
-    
-    function handleKeyPress(){
-        const navigate = useNavigate();
-
-        useEffect(() => {
-            navigate("/resume");
-        })
-    }
-
+function Menu(){    
     return(
-        <div className="menu" onKeyDown={handleKeyPress}>
+        <div className="menu">
             <p id="menu-title">COMMAND MENU</p>
             <div id="commands">
                 <p>a</p>

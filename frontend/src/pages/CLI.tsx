@@ -1,12 +1,10 @@
 import CommandLine from "../components/CommandLine";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-function CLI() {
-  
+function CLI() {  
   return (
     <div className="CLI">
       <CommandLine />
-      
     </div>
   );
 }
