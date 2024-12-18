@@ -1,21 +1,17 @@
-import { useState } from 'react'
-import Title from './components/Title'
-import LinkTab from './components/LinkTab'
-import Menu from './components/Menu'
-import Continue from './components/Continue'
+import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import CLI from "./pages/CLI";
 
 function App() {
-
   return (
-    <>
-      <div className="home">
-        <Title />
-        <LinkTab />
-        <Menu />
-        <Continue />
-      </div>
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" Component={Home}/>
+        <Route path="/resume" Component={CLI}></Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

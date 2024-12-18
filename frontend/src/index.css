@@ -21,15 +21,17 @@
 }
 
 body {
+  cursor: default;
   font-family: "Intel One Mono";
   background-color: #0F1316;
+  color: #248AFF;
 }
 
 .home {
+  justify-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #248AFF;
 }
 
 .title {
@@ -45,7 +47,6 @@ body {
   height: fit-content;
   width: 480px;
   justify-content: space-between;
-  /* border: 1px solid yellow; */
   margin-bottom: 35px;
 
 }
@@ -56,36 +57,44 @@ a:visited { text-decoration: none; color: #248AFF}
 #menu-title {
   font-family: "Intel One Mono Bold";
   text-align: center;
-  width: 150px;
+  width: 140px;
   height: fit-content;
-  position: relative;
+  position: absolute;
   background-color: #0F1316;
-  left: 35%;
-  top: -10px;
+  left: 44%;
+  top: 33.5%;
 }
 
 .menu {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
-  grid-template-columns: 2101fr;
-  text-align: center;
   border: 1px solid;
   height: 300px;
   width: 480px;
   margin-bottom: 10px;
-  text-align: left;
 }
 
 #commands {
-  border: solid 1px white;
-  height: fit-content;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  justify-self: left;
+  height: 100%;
   width: fit-content;
-  font-family: "Intel One Mono";
+  font-family: "Intel One Mono Bold";
 }
 
 #command-desc {
-  border: solid 1px white;
-  height: fit-content;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: space-evenly;
+  height: 100%;
   width: fit-content;
   font-family: "Intel One Mono Light";
 }
@@ -108,3 +117,39 @@ a:visited { text-decoration: none; color: #248AFF}
     opacity: 0;
   }
 }
+
+.CLI {
+  padding: 10px;
+  height: 80vh;
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+}
+
+#command-line {
+  display: flex;
+  margin-bottom: 7px;
+}
+
+#response {
+  margin-bottom: 7px;
+}
+
+#system-tag {
+  font-family: "Intel One Mono Bold";
+  margin-right: 8px;
+}
+
+#user-input {
+  border: none;
+  width: 50vw;
+  color: #57DBFF;
+  background-color: inherit;
+  text-decoration: none;
+  font-family: "Intel One Mono";
+  font-weight: bolder;
+  font-size: inherit;
+}
+
+#user-input:focus { outline: none; }
