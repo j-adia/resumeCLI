@@ -78,10 +78,11 @@ a:visited { text-decoration: none; color: #248AFF}
 
 #commands {
   padding: 10px;
+  margin-left: 15px;
   display: flex;
   flex-direction: column;
+  text-align: left;
   justify-content: space-evenly;
-  align-items: center;
   justify-self: left;
   height: 100%;
   width: fit-content;
@@ -120,7 +121,7 @@ a:visited { text-decoration: none; color: #248AFF}
 
 .CLI {
   padding: 10px;
-  height: 80vh;
+  /* height: 80vh; */
   width: 90vw;
   display: flex;
   flex-direction: column;
@@ -129,11 +130,11 @@ a:visited { text-decoration: none; color: #248AFF}
 
 #command-line {
   display: flex;
-  margin-bottom: 7px;
+  margin-bottom: 5px;
 }
 
 #response {
-  margin-bottom: 7px;
+  margin-bottom: 5px;
 }
 
 #system-tag {

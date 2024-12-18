@@ -11,7 +11,7 @@ function CommandLine() {
   function handleCommand(e: FormEvent) {
     e.preventDefault();
 
-    const validCommands = new Set(["cd", "ls", "h", "a", "vi", "clr"]);
+    const validCommands = new Set(["cd", "ls", "h", "a", "vi", "clr", "exit"]);
     const userCommand = command.split(" ")[0];
 
     if (!validCommands.has(userCommand)) {
