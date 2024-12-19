@@ -6,9 +6,12 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
-  
+
   const handleKeyDown = () => {
     navigate("/resume");
+
+    // prevents the key entered from appearing on the next page
+    window.location.reload();
   };
 
   useEffect(() => {
