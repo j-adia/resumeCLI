@@ -43,7 +43,6 @@ function DoAction(props: CommandType){
                     I hope you enjoy! and for those who haven't... don't worry, this app is designed to be beginner friendly!<br/><br/>
                     to start, list the sections of my resume with the 'ls' command. these are "folders". to navigate to them, use 'cd {'[directory-name]'}'.
 
-                    blah blah blah
                 </p>
             )
     }
