@@ -2,8 +2,8 @@ function LinkTab() {
     return (
         <div className="links">
             <p>orlando, fl</p>
-            <a href="https://github.com/j-adia" target="_blank">github/j-adia</a>
-            <a href="https://www.linkedin.com" target="_blank">linkedin/jmh03</a>
+            <a href="https://github.com/j-adia" title="check out my GitHub" target="_blank">github/j-adia</a>
+            <a href="https://www.linkedin.com" title="go to my Linkedin" target="_blank">linkedin/jmh03</a>
         </div>
     );
 }
