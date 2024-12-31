@@ -3,15 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 type CommandType = {
-    commandType: string;
-    commandSource?: string;
+    command: string;
+    currentDir: string;
+    setCurrentDir: (dir: string) => void;
 };
 
-function DoAction(props: CommandType){
+function ActionResponse(props: CommandType){
+    const directoryFiles = new Map<string, string[]>([
+        ['', ['projects', 'skills', 'coursework']],
+        ['projects', ['Movie Review Website', 'Notion Note Converter', 'Morse Code Translator', 'Record Player']],
+        ['skills', ['C/C++', 'Python', 'Java', 'Javascript', 'Typescript', 'Git + Github', 'SQL', 'MongoDB', 'Excel', 'Docker', 'React', 'Flask']],
+        ['coursework', ['Processes for Object-Oriented Software Development', 'Computer Science II', 'Artificial Intelligence', 'Systems Software', 'Database Management Systems']]
+    ]);
+
     const navigate = useNavigate();
 
-    let commandType = props.commandType.split(" ")[0];
-    let commandSource = props.commandSource;
+    const [commandType, commandSource] = props.command.split(" ");
 
     switch(commandType){
         case "h":
@@ -45,15 +52,24 @@ function DoAction(props: CommandType){
 
                 </p>
             )
+
+        case "clr":
+            window.location.reload();
+            break;
+
+        case "cd":
+            props.setCurrentDir(commandSource);
+            break;
+        
+        case "ls":
+            if (!commandSource){
+                return <p id="response">{directoryFiles.get(props.currentDir)?.join(' ')}</p>
+            }
     }
 
-    if (props.commandType.split(" ").length == 2){
-        commandSource = props.commandType.split(" ")[1];
-    }
-
-    return (
-        <p id="response">i'm {commandType}-ing something to {commandSource}</p>
-    );
+    // return (
+    //     <p id="response">i'm {commandType}-ing something to {commandSource}</p>
+    // );
 }
 
-export default DoAction;
+export default ActionResponse;

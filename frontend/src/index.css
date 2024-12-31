@@ -122,7 +122,8 @@ a:visited { text-decoration: none; color: #248AFF}
 
 .CLI {
   padding: 10px;
-  /* height: 80vh; */
+  border: 2px solid grey;
+  height: 80vh;
   width: 90vw;
   display: flex;
   flex-direction: column;
@@ -130,7 +131,9 @@ a:visited { text-decoration: none; color: #248AFF}
 }
 
 #command-line {
+  border: 2px solid white;
   display: flex;
+  align-items: center;
   margin-bottom: 5px;
 }
 
@@ -139,12 +142,13 @@ a:visited { text-decoration: none; color: #248AFF}
 }
 
 #system-tag {
+  border: 2px solid orange;
+  min-width: fit-content;
   font-family: "Intel One Mono Bold";
-  margin-right: 8px;
 }
 
 #user-input {
-  border: none;
+  /* border: 1px solid red; */
   width: 50vw;
   color: #57DBFF;
   background-color: inherit;
@@ -152,6 +156,11 @@ a:visited { text-decoration: none; color: #248AFF}
   font-family: "Intel One Mono";
   font-weight: bolder;
   font-size: inherit;
+  margin-left: 11px;
 }
 
 #user-input:focus { outline: none; }
+
+#directory-name {
+  font-family: "Intel One Mono Bold";
+}

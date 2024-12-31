@@ -1,10 +1,12 @@
 import CommandLine from "../components/CommandLine";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function CLI() {  
+  const [currentDir, setCurrentDir] = useState("");
+
   return (
-    <div className="CLI">
-      <CommandLine />
+    <div>
+      <CommandLine currentDir={currentDir} setCurrentDir={setCurrentDir}/>
     </div>
   );
 }

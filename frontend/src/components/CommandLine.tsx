@@ -1,8 +1,14 @@
-import { FormEvent, useEffect, useRef } from "react";
+import { FormEvent } from "react";
 import { useState } from "react";
-import DoAction from "./DoAction";
+import ActionResponse from "./ActionResponse";
+import Directory from "./Directory";
 
-function CommandLine() {
+type CommandLineProps = {
+  currentDir: string;
+  setCurrentDir: (dir: string) => void;
+}
+
+function CommandLine({ currentDir, setCurrentDir }: CommandLineProps) {
   const [command, setCommand] = useState("");
   const [error, setError] = useState("");
   const [isDisabled, setDisabled] = useState(false);
@@ -11,20 +17,26 @@ function CommandLine() {
   function handleCommand(e: FormEvent) {
     e.preventDefault();
 
+    const validDirectories = new Set(["", "projects", "coursework", "skills"]);
     const validCommands = new Set(["cd", "ls", "h", "a", "vi", "clr", "exit"]);
-    const userCommand = command.split(" ")[0];
+    const [userCommand, ...args] = command.split(" ");
 
     if (!validCommands.has(userCommand)) {
-      setError(`Error: command '${userCommand}' not found (type 'h' for help)`);
+      setError(`Error: command '${userCommand}' not found (enter 'h' for help)`);
     } 
-    else if (command.split(" ").length > 2){
-      setError(`Error: command '${userCommand}' has too many arguments`);
+    else if (args.length > 1){
+      setError(`Error: command '${userCommand}' has ${args.length} arguments. only one is required.`);
+    }
+    else if (args.length === 1 && !validDirectories.has(args[0])){
+      setError(`Error: directory '${args[0]}' does not exist (enter 'ls' to view directories)`);
+    }
+    else if ((userCommand === "cd" || userCommand === "vi") && args.length !== 1){
+      setError(`Error: '${userCommand}' command requires exactly one argument`);
     }
     else {
       setError("");
       setAction(userCommand);
     }
-
     setDisabled(true);
   }
 
@@ -35,8 +47,7 @@ function CommandLine() {
   return (
     <>
       <div id="command-line">
-        <p id="system-tag">user@resume-overview:</p>
-        {/* add component for directory */}
+        <Directory currentDir={currentDir}/>
         <form onSubmit={handleCommand}>
           <input
             type="text"
@@ -52,8 +63,14 @@ function CommandLine() {
         </form>
       </div>
       {error && <p id="response">{error}</p>}
-      {doAction && <DoAction commandType={command}/>}
-      {error && <CommandLine/> || doAction && <CommandLine/>}
+      {doAction && (
+        <ActionResponse 
+          command={command}
+          currentDir={currentDir}
+          setCurrentDir={setCurrentDir}
+        />
+      )}
+      {error && <CommandLine currentDir={currentDir} setCurrentDir={setCurrentDir}/> || doAction && <CommandLine currentDir={currentDir} setCurrentDir={setCurrentDir}/>}
     </>
   );
 }
