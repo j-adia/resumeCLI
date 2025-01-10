@@ -9,7 +9,7 @@ const text = `
 function Title(){
     return (
         // pre tag preserves original formattting
-        <div className="title"><pre>{text}</pre></div>
+        <div className="title"><pre><span style={ {fontFamily: 'IBM VGA'} }>{text}</span></pre></div>
     );
 }
 

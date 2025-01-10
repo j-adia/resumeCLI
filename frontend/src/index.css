@@ -4,6 +4,7 @@
   padding: 0;
 }
 
+
 @font-face {
   font-family: "Intel One Mono";
   src: url("/src/assets/IntelOneMono-Regular.woff") format('woff');
@@ -21,14 +22,20 @@
   font-weight: lighter;
 }
 
+@font-face {
+  font-family: "IBM VGA";
+  src: url("/src/assets/Web437_IBM_VGA_9x14.woff") format('woff');
+}
+
 body {
-  cursor: default;
-  font-family: "Intel One Mono";
-  --bgColor: #39FF14;
+  font-family: "IBM VGA";
+  --bgColor: rgb(57, 255, 20);
   background-color: #0d140c;
   color: var(--bgColor);
-  --shadow: 1px 1px 4px lch(from var(--bgColor) calc(l + 10) c h);
+  --shadow: 1px 1px 3.5px lch(from var(--bgColor) calc(l + -10) c h);
   text-shadow: var(--shadow);
+  padding-bottom: 30px;
+  cursor: default;
 }
 
 .home {
@@ -39,33 +46,30 @@ body {
 }
 
 .title {
-  /* border: 1px solid tomato; */
   padding: 20px;
   font-weight: bold;
-  margin-bottom: 10px;
 }
 
 .links {
-  font-family: "Intel One Mono Bold";
   display: flex;
   height: fit-content;
   width: 480px;
   justify-content: space-between;
-  margin-bottom: 35px;
-
+  margin-bottom: 25px;
 }
 
 a { text-decoration: none; }
 a:visited { text-decoration: none; color:inherit}
 
 #menu-title {
-  font-family: "Intel One Mono Bold";
   text-align: center;
   width: 140px;
   height: fit-content;
   position: absolute;
-  left: 44%;
-  top: 33.5%;
+  top: 35%;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
   background-color: #0d140c;
 }
 
@@ -77,7 +81,7 @@ a:visited { text-decoration: none; color:inherit}
   border: 1px solid;
   height: 300px;
   width: 480px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 #commands {
@@ -90,7 +94,6 @@ a:visited { text-decoration: none; color:inherit}
   justify-self: left;
   height: 100%;
   width: fit-content;
-  font-family: "Intel One Mono Bold";
 }
 
 #command-desc {
@@ -101,7 +104,6 @@ a:visited { text-decoration: none; color:inherit}
   justify-content: space-evenly;
   height: 100%;
   width: fit-content;
-  font-family: "Intel One Mono Light";
 }
 
 .blink {
@@ -124,28 +126,25 @@ a:visited { text-decoration: none; color:inherit}
 }
 
 .CLI {
-  padding: 10px;
-  border: 2px solid grey;
-  height: 80vh;
-  width: 90vw;
-  display: flex;
+    display: flex;
   flex-direction: column;
-  margin: 50px;
+  margin: 20px 20px 20px 20px;
 }
 
 #command-line {
   display: flex;
   align-items: center;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 #response {
-  margin-bottom: 5px;
+  width: 90vw;
+  margin-bottom: 10px;
 }
 
 #system-tag {
   min-width: fit-content;
-  font-family: "Intel One Mono Bold";
+  font-weight: bolder;
 }
 
 #user-input {
@@ -155,13 +154,57 @@ a:visited { text-decoration: none; color:inherit}
   background-color: inherit;
   text-decoration: none;
   text-shadow: var(--shadow);
-  font-family: "Intel One Mono";
+  font-family: "IBM VGA";
   font-size: inherit;
   margin-left: 12px;
 }
 
 #user-input:focus { outline: none; }
 
-#directory-name {
-  font-family: "Intel One Mono Bold";
+.nav {
+  font-family: "IBM VGA";
+  font-size: larger;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  width: 70vw;
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+#nav-item {
+  border: 1px solid rgba(57, 255, 20, 0.7);
+  width: 150px;
+  text-align: center;
+  text-wrap-mode: nowrap;
+  padding: 10px;
+}
+
+@media (max-width: 523px) {
+  .nav {
+    font-size: medium;
+  }
+}
+
+.neofetch {
+  padding: 10px 0px 10px 0px;
+  height: fit-content;
+  max-width: 95vw;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.neofetch > pre {
+  max-width: 230px;
+  margin-right: 30px;
+}
+
+#neoinfo {
+  height: fit-content;
+  max-width: fit-content;
+  text-align: left;
 }

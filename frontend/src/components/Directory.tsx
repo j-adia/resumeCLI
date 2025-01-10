@@ -14,7 +14,7 @@ function Directory({ currentDir }: Directory){
     // }
 
     return (
-        <p id="system-tag">user@resume-overview:~{currentDir}$</p>
+        <p id="system-tag">{">"} resume@overview:{currentDir}</p>
     );
 }
 

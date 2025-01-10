@@ -5,10 +5,9 @@ import Directory from "./Directory";
 
 type CommandLineProps = {
   currentDir: string;
-  setCurrentDir: (dir: string) => void;
 }
 
-function CommandLine({ currentDir, setCurrentDir }: CommandLineProps) {
+function CommandLine({ currentDir }: CommandLineProps) {
   const [command, setCommand] = useState("");
   const [error, setError] = useState("");
   const [isDisabled, setDisabled] = useState(false);
@@ -18,7 +17,7 @@ function CommandLine({ currentDir, setCurrentDir }: CommandLineProps) {
     e.preventDefault();
 
     const validDirectories = new Set(["", "projects", "coursework", "skills"]);
-    const validCommands = new Set(["cd", "ls", "h", "a", "vi", "clr", "exit"]);
+    const validCommands = new Set(["cd", "ls", "h", "a", "vi", "clr", "exit", "tree", "neofetch"]);
     const [userCommand, ...args] = command.split(" ");
 
     if (!validCommands.has(userCommand)) {
@@ -67,10 +66,9 @@ function CommandLine({ currentDir, setCurrentDir }: CommandLineProps) {
         <ActionResponse 
           command={command}
           currentDir={currentDir}
-          setCurrentDir={setCurrentDir}
         />
       )}
-      {error && <CommandLine currentDir={currentDir} setCurrentDir={setCurrentDir}/> || doAction && <CommandLine currentDir={currentDir} setCurrentDir={setCurrentDir}/>}
+      {error && <CommandLine currentDir={currentDir} /> || doAction && <CommandLine currentDir={currentDir}/>}
     </>
   );
 }
