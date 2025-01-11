@@ -62,8 +62,6 @@ function buildTree(){
     return root;
 }
 
-// 7
-
 function printTree(root: MenuItem){
     var trees = [];
 
@@ -152,7 +150,7 @@ function ActionResponse(props: CommandType){
                     ` ls: list items in the current directory.<br/>
                     ` clr: clear terminal.<br/>
                     ` neofetch: my summary.<br/>
-                    ` quote: print random quote from Dune.<br/>
+                    ` quote: print a random quote from Dune.<br/>
                     ` rice: change terminal theme.<br/>
                     ` open {'<url>'}: opens a url in a new tab.<br/>
                     ` open linkedin: goes to my linkedin.<br/>
@@ -195,6 +193,21 @@ function ActionResponse(props: CommandType){
             }
             break;
         
+        case "open":
+            if (commandSource === "linkedin"){
+                window.open('https://www.linkedin.com/in/jmh03/', '_blank', 'noopener noreferrer');
+            }
+            
+            else if (commandSource === "github"){
+                window.open('https://github.com/j-adia', '_blank', 'noopener noreferrer');
+            }
+
+            else {
+                window.open("https://" + commandSource);
+            }
+
+            break;
+
         case "tree":
             var treeString = printTree(tree);
 
@@ -234,6 +247,11 @@ function ActionResponse(props: CommandType){
                     </div>
                 </div>
             )
+        
+            case "rice":
+                
+
+                break;
     }
 }
 

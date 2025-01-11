@@ -27,10 +27,10 @@ function CommandLine({ currentDir }: CommandLineProps) {
     else if (args.length > 1){
       setError(`Error: command '${userCommand}' has ${args.length} arguments. only one is required.`);
     }
-    else if (args.length === 1 && !validDirectories.has(args[0])){
+    else if (userCommand === "cd" && !validDirectories.has(args[0])){
       setError(`Error: directory '${args[0]}' does not exist (enter 'ls' to view directories)`);
     }
-    else if ((userCommand === "cd" || userCommand === "vi") && args.length !== 1){
+    else if ((userCommand === "cd" || userCommand === "open") && args.length !== 1){
       setError(`Error: '${userCommand}' command requires exactly one argument`);
     }
     else {
