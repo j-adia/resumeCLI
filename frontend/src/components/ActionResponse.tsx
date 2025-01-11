@@ -6,7 +6,16 @@ type CommandType = {
     currentDir: string;
 };
 
-export class TreeNode 
+const directoryFiles = new Map<string, string[]>([
+    ['projects', ['Contact Manager', 'Notion Note Converter', 'Morse Code Translator', 'Record Player']],
+    ['skills', ['C/C++', 'Python', 'Java', 'Javascript', 'Typescript', 'Git + Github', 'SQL', 'MongoDB', 'Excel', 'Docker', 'React', 'Flask']],
+    ['coursework', ['Processes for Object-Oriented Software Development', 'Computer Science II', 'Artificial Intelligence', 'Systems Software', 'Database Management Systems']],
+    ['extras', ['album recommendations']]
+]);
+
+//├── └── │
+
+class TreeNode 
 {
     public parent: TreeNode | null;
     public children: TreeNode[] = [];
@@ -18,7 +27,7 @@ export class TreeNode
     }
 }
 
-export class MenuItem extends TreeNode
+class MenuItem extends TreeNode
 {
     public label: string = "";
     public parent: MenuItem | null;
@@ -33,18 +42,99 @@ export class MenuItem extends TreeNode
 }
 
 function buildTree(){
+    console.log("building tree...");
+
+    
+
     const root = new MenuItem(null, "~");
-    const projectsDir = new MenuItem(root, "projects/");
-    const skillsDir = new MenuItem(root, "skills/");
-    const educationDir = new MenuItem(root, "education/");
+
+    for (let [key, value] of directoryFiles)
+    {
+        const newDir = new MenuItem(root, key);
+
+        for (let i = 0; i < value.length; i++){
+            const file = value[i];
+            
+            new MenuItem(newDir, file);
+        }
+    }
+
+    return root;
+}
+
+// 7
+
+function printTree(root: MenuItem){
+    var trees = [];
+
+    trees.push(
+        "resume\n",
+    );
+
+    const size = root.children.length;
+    let count = 0;
+
+    // parent directories
+    root.children.forEach(
+        (e) => {
+
+            if (count === size - 1){
+                trees.push(`└───── ${e.label}\n` + "\t");
+            }
+
+            else {
+                trees.push(
+                    `├───── ${e.label}\n`,
+                );
+
+                if (count === size - 1){
+                    trees.push("│\t└");
+                }
+                else {
+                    trees.push("│\t├");
+                }
+
+                count++;
+            }
+            
+            let count2 = 0;
+            const size2 = e.children.length;
+
+            
+            // sub directories
+            e.children.forEach(
+                (b) => {
+                    if (size2 === 1){
+                        trees.push(`└───── ${b.label}`);
+                    }
+
+                    else {
+                        trees.push(
+                            `───── ${b.label}\n`,
+                            );
+                
+                            if (count2 === size2 - 2){
+                                trees.push("│\t└");
+                            }
+                            else if (count2 !== size2 - 1){
+                                trees.push("│\t├");
+                            }
+                    }
+                    
+                    count2++;
+                }
+            )
+        }
+     );
+
+    // don't forget join!
+    return trees.join("");
 }
 
 function ActionResponse(props: CommandType){
-    const directoryFiles = new Map<string, string[]>([
-        ['projects', ['Contact Manager', 'Notion Note Converter', 'Morse Code Translator', 'Record Player']],
-        ['skills', ['C/C++', 'Python', 'Java', 'Javascript', 'Typescript', 'Git + Github', 'SQL', 'MongoDB', 'Excel', 'Docker', 'React', 'Flask']],
-        ['coursework', ['Processes for Object-Oriented Software Development', 'Computer Science II', 'Artificial Intelligence', 'Systems Software', 'Database Management Systems']]
-    ]);
+
+    const tree = buildTree();   
+    printTree(tree);
 
     const navigate = useNavigate();
 
@@ -53,15 +143,23 @@ function ActionResponse(props: CommandType){
     switch(commandType){
         case "h":
             return (
-                <p id="response">
-                    ` ls: list items in the current directory <br/>
-                    ` cd {'directory-name'}: switch to the specified directory <br/>
-                    ` clr: clear terminal<br/>
-                    ` h: get help<br/>
-                    ` vi {'file-name'}: view file<br/>
-                    ` a: about {'(view my bio)'}<br/>
-                    ` exit: return to title screen <br/>
-                    ` neofetch: a tldr<br/>
+                <p className="response">
+                    Commands <br/>
+                    --------- <br/>
+                    ` tree: list everything.<br/>
+                    ` cd {'<directory-name>'}: switch to directory.<br/>
+                    ` cat {'<file-name>'}: view file.<br/>
+                    ` ls: list items in the current directory.<br/>
+                    ` clr: clear terminal.<br/>
+                    ` neofetch: my summary.<br/>
+                    ` quote: print random quote from Dune.<br/>
+                    ` rice: change terminal theme.<br/>
+                    ` open {'<url>'}: opens a url in a new tab.<br/>
+                    ` open linkedin: goes to my linkedin.<br/>
+                    ` open github: goes to my github.<br/>
+                    ` a: about.<br/>
+                    ` h: get help.<br/>
+                    ` exit: return to title screen.<br/>
                 </p>
             ); 
 
@@ -70,14 +168,14 @@ function ActionResponse(props: CommandType){
                 navigate("/");
             })
 
-            return null;
+            return;
         
         case "a":
             return (
-                <p id="response">
-                    welcome! i'm Jadia, a computer science student at the University of Central Florida. i'm an aspiring cloud developer/dev-ops engineer.<br/><br/>
-                    I made this website so I could present my resume in a fun, unique way. so, if you're a human looking at this website, I hope you enjoy!<br/><br/>
-                    and if you've never used a command line terminal before, this will be your beginner-friendly introduction!<br/><br/>
+                <p className="response">
+                    welcome! i'm Jadia, a computer science student at the University of Central Florida. i'm an aspiring cloud software developer/dev-ops engineer.<br/><br/>
+                    I made this website so I could present my resume in a fun, unique way. so, if you're a human seeing this, I hope you enjoy!<br/><br/>
+                    if you've never used a command line terminal before, this is your beginner-friendly introduction!<br/><br/>
                     to start, list the sections of my resume with the 'ls' command. these are <i>directories</i>. to navigate to them, use 'cd {'[directory-name]'}'. or, 
                     you can just use the quick navigation commands at the top :)
                 </p>
@@ -93,9 +191,18 @@ function ActionResponse(props: CommandType){
         
         case "ls":
             if (!commandSource){
-                return <p id="response"> contents --{">"} {directoryFiles.get(props.currentDir)?.join(' ')}</p>
+                return <p className="response"> contents --{">"} {directoryFiles.get(props.currentDir)?.join(' ')}</p>
             }
             break;
+        
+        case "tree":
+            var treeString = printTree(tree);
+
+            return (
+                <div className="response" id="tree">
+                    <pre>{treeString}</pre>
+                </div>
+            )
             
         case "neofetch":
             const neo = `
@@ -113,20 +220,20 @@ function ActionResponse(props: CommandType){
             '--'
             
 `;
-        return(
-            <div className="neofetch" id="response">
-                <pre>{neo}</pre>
-                <div id="neoinfo">
-                    <p>resume@overview</p>
-                    <p>----------------</p>
-                    <p><b>Host</b>: Jadia Holmes</p>
-                    <p><b>Uptime</b>: 21 years</p>
-                    <p><b>Occupation</b>: CS @ UCF</p>
-                    <p><b>Languages</b>: python, c++, java</p>
-                    <p><b>Likes</b>: music, long walks, tea</p>
+            return(
+                <div id="neofetch" className="response">
+                    <pre>{neo}</pre>
+                    <div id="neoinfo">
+                        <p>resume@overview</p>
+                        <p>----------------</p>
+                        <p><b>Host</b>: Jadia Holmes</p>
+                        <p><b>Uptime</b>: 21 years</p>
+                        <p><b>Occupation</b>: CS @ UCF</p>
+                        <p><b>Languages</b>: python, c++, java</p>
+                        <p><b>Likes</b>: music, long walks, tea</p>
+                    </div>
                 </div>
-            </div>
-        )
+            )
     }
 }
 

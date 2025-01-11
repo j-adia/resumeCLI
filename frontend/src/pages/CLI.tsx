@@ -8,7 +8,7 @@ function CLI() {
   return (
     <div className="CLI">
       <NavBar />
-      <CommandLine currentDir={currentDir} setCurrentDir={setCurrentDir}/>
+      <CommandLine currentDir={currentDir}/>
     </div>
   );
 }

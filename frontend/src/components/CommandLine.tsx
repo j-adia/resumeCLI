@@ -1,5 +1,6 @@
 import { FormEvent } from "react";
 import { useState } from "react";
+import { useEffect } from "react";
 import ActionResponse from "./ActionResponse";
 import Directory from "./Directory";
 
@@ -17,7 +18,7 @@ function CommandLine({ currentDir }: CommandLineProps) {
     e.preventDefault();
 
     const validDirectories = new Set(["", "projects", "coursework", "skills"]);
-    const validCommands = new Set(["cd", "ls", "h", "a", "vi", "clr", "exit", "tree", "neofetch"]);
+    const validCommands = new Set(["cd", "ls", "cat", "h", "a", "p", "e", "s", "clr", "exit", "tree", "neofetch", "quote", "open", "rice"]);
     const [userCommand, ...args] = command.split(" ");
 
     if (!validCommands.has(userCommand)) {

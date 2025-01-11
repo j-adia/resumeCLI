@@ -6,7 +6,7 @@ type Directory = {
 };
 
 function Directory({ currentDir }: Directory){
-    console.log(currentDir);
+    // console.log(currentDir);
     // const validDirectories = new Set(["projects", "coursework", "skills"]);
     // 
     // if (!validDirectories.has(props.directory)){

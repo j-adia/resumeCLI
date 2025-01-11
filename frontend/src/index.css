@@ -29,7 +29,8 @@
 
 body {
   font-family: "IBM VGA";
-  --bgColor: rgb(57, 255, 20);
+  /* --bgColor: rgb(57, 255, 20); this is a pukier green */ 
+  --bgColor: rgb(15, 247, 111);
   background-color: #0d140c;
   color: var(--bgColor);
   --shadow: 1px 1px 3.5px lch(from var(--bgColor) calc(l + -10) c h);
@@ -137,7 +138,7 @@ a:visited { text-decoration: none; color:inherit}
   margin-bottom: 10px;
 }
 
-#response {
+.response {
   width: 90vw;
   margin-bottom: 10px;
 }
@@ -175,21 +176,30 @@ a:visited { text-decoration: none; color:inherit}
 }
 
 #nav-item {
-  border: 1px solid rgba(57, 255, 20, 0.7);
+  border: 1px solid rgba(15, 247, 111, 0.7);
   width: 150px;
   text-align: center;
   text-wrap-mode: nowrap;
   padding: 10px;
 }
 
-@media (max-width: 523px) {
+@media (max-width: 620px) {
+  body {
+    font-size: 15px;
+  }
+
   .nav {
     font-size: medium;
   }
+
+  #neofetch > pre {
+    font-size: 10px;
+  }
+
 }
 
-.neofetch {
-  padding: 10px 0px 10px 0px;
+#neofetch {
+  padding: 8px 0px 8px 0px;
   height: fit-content;
   max-width: 95vw;
   display: flex;
@@ -198,7 +208,7 @@ a:visited { text-decoration: none; color:inherit}
   align-items: center;
 }
 
-.neofetch > pre {
+#neofetch > pre {
   max-width: 230px;
   margin-right: 30px;
 }
@@ -207,4 +217,8 @@ a:visited { text-decoration: none; color:inherit}
   height: fit-content;
   max-width: fit-content;
   text-align: left;
+}
+
+#tree > pre {
+  font-family: "IBM VGA";
 }
