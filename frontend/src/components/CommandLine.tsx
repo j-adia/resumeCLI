@@ -13,25 +13,48 @@ function CommandLine({ currentDir }: CommandLineProps) {
   const [error, setError] = useState("");
   const [isDisabled, setDisabled] = useState(false);
   const [doAction, setAction] = useState("");
+  const [directory, setDirectory] = useState(currentDir);
+  const [nextComponent, setNextComponent] = useState<JSX.Element | null>(null);
+  const [isCD, setIsCD] = useState(false);
 
   function handleCommand(e: FormEvent) {
     e.preventDefault();
 
-    const validDirectories = new Set(["", "projects", "coursework", "skills"]);
-    const validCommands = new Set(["cd", "ls", "cat", "h", "a", "p", "e", "s", "clr", "exit", "tree", "neofetch", "quote", "open", "rice"]);
+    const validDirectories = new Set(["", "projects", "coursework", "skills", ".."]);
+    const validCommands = new Set(["cd", "ls", "cat", "h", "a", "p", "e", "s", "clr", "exit", "tree", "neofetch", "open", "rice"]);
     const [userCommand, ...args] = command.split(" ");
+    let nextDir = "";
 
     if (!validCommands.has(userCommand)) {
       setError(`Error: command '${userCommand}' not found (enter 'h' for help)`);
     } 
+
     else if (args.length > 1){
       setError(`Error: command '${userCommand}' has ${args.length} arguments. only one is required.`);
     }
-    else if (userCommand === "cd" && !validDirectories.has(args[0])){
-      setError(`Error: directory '${args[0]}' does not exist (enter 'ls' to view directories)`);
-    }
     else if ((userCommand === "cd" || userCommand === "open") && args.length !== 1){
       setError(`Error: '${userCommand}' command requires exactly one argument`);
+    }
+    else if (userCommand === "cd" && !validDirectories.has(args[0])){
+      setError(`Error: directory '${args[0]}' does not exist (enter 'ls' to view directories/files)`);
+    }
+    else if (userCommand === "cd"){
+      setError("");
+      setIsCD(true);
+
+      switch(args[0]){
+          case "..":
+            nextDir = "";
+            break;
+          
+          default:
+            nextDir = args[0];
+      }
+
+      setNextComponent(<CommandLine currentDir={nextDir} />);
+      setDirectory(nextDir);
+
+      setAction(userCommand);
     }
     else {
       setError("");
@@ -62,16 +85,14 @@ function CommandLine({ currentDir }: CommandLineProps) {
           <input type="submit" style={{ display: "none" }} />
         </form>
       </div>
-      {error && <p id="response">{error}</p>}
-      {doAction && (
-        <ActionResponse 
-          command={command}
-          currentDir={currentDir}
-        />
-      )}
-      {error && <CommandLine currentDir={currentDir} /> || doAction && <CommandLine currentDir={currentDir}/>}
+      {error && <p className="response">{error}</p>}
+      {doAction && (<ActionResponse command={command} currentDir={directory} /> )}
+      {isCD && nextComponent}
+      {!isCD && error && <CommandLine currentDir={directory} /> || !isCD && doAction && <CommandLine currentDir={directory}/>}  
+
     </>
   );
 }
 
 export default CommandLine;
+

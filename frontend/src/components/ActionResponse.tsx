@@ -7,10 +7,9 @@ type CommandType = {
 };
 
 const directoryFiles = new Map<string, string[]>([
-    ['projects', ['Contact Manager', 'Notion Note Converter', 'Morse Code Translator', 'Record Player']],
+    ['projects', ['Contact Manager', 'Notion Note Converter', 'Arduino Morse Code Translator', 'Record Player']],
     ['skills', ['C/C++', 'Python', 'Java', 'Javascript', 'Typescript', 'Git + Github', 'SQL', 'MongoDB', 'Excel', 'Docker', 'React', 'Flask']],
     ['coursework', ['Processes for Object-Oriented Software Development', 'Computer Science II', 'Artificial Intelligence', 'Systems Software', 'Database Management Systems']],
-    ['extras', ['album recommendations']]
 ]);
 
 //├── └── │
@@ -43,9 +42,6 @@ class MenuItem extends TreeNode
 
 function buildTree(){
     console.log("building tree...");
-
-    
-
     const root = new MenuItem(null, "~");
 
     for (let [key, value] of directoryFiles)
@@ -54,7 +50,6 @@ function buildTree(){
 
         for (let i = 0; i < value.length; i++){
             const file = value[i];
-            
             new MenuItem(newDir, file);
         }
     }
@@ -75,7 +70,6 @@ function printTree(root: MenuItem){
     // parent directories
     root.children.forEach(
         (e) => {
-
             if (count === size - 1){
                 trees.push(`└───── ${e.label}\n` + "\t");
             }
@@ -88,17 +82,17 @@ function printTree(root: MenuItem){
                 if (count === size - 1){
                     trees.push("│\t└");
                 }
-                else {
+                else if (count < size - 1){
                     trees.push("│\t├");
                 }
-
-                count++;
+                else {
+                    trees.push("\t");
+                }
             }
             
             let count2 = 0;
             const size2 = e.children.length;
 
-            
             // sub directories
             e.children.forEach(
                 (b) => {
@@ -117,8 +111,8 @@ function printTree(root: MenuItem){
                             else if (count2 !== size2 - 1){
                                 trees.push("│\t├");
                             }
+                            
                     }
-                    
                     count2++;
                 }
             )
@@ -134,11 +128,23 @@ function ActionResponse(props: CommandType){
     const tree = buildTree();   
     printTree(tree);
 
+    console.log(props.currentDir);
+    console.log(props.command);
+
     const navigate = useNavigate();
 
     const [commandType, commandSource] = props.command.split(" ");
 
     switch(commandType){
+        case "p":
+            return <p className="response">{directoryFiles.get("projects")?.join(", ")}</p>
+        
+        case "s":
+            return <p className="response">{directoryFiles.get("skills")?.join(", ")}</p>
+
+        case "e":
+            return <p className="response">{directoryFiles.get("coursework")?.join(", ")}</p>
+
         case "h":
             return (
                 <p className="response">
@@ -146,11 +152,9 @@ function ActionResponse(props: CommandType){
                     --------- <br/>
                     ` tree: list everything.<br/>
                     ` cd {'<directory-name>'}: switch to directory.<br/>
-                    ` cat {'<file-name>'}: view file.<br/>
                     ` ls: list items in the current directory.<br/>
                     ` clr: clear terminal.<br/>
                     ` neofetch: my summary.<br/>
-                    ` quote: print a random quote from Dune.<br/>
                     ` rice: change terminal theme.<br/>
                     ` open {'<url>'}: opens a url in a new tab.<br/>
                     ` open linkedin: goes to my linkedin.<br/>
@@ -160,6 +164,9 @@ function ActionResponse(props: CommandType){
                     ` exit: return to title screen.<br/>
                 </p>
             ); 
+
+        case "cd":
+            return;
 
         case "exit":
             useEffect(() => {
@@ -182,14 +189,18 @@ function ActionResponse(props: CommandType){
         case "clr":
             window.location.reload();
             break;
-
-        case "cd":
-            props.currentDir = commandSource;
-            break;
         
         case "ls":
+            const contents = [];
             if (!commandSource){
-                return <p className="response"> contents --{">"} {directoryFiles.get(props.currentDir)?.join(' ')}</p>
+                if (props.currentDir === ""){
+                    directoryFiles.forEach((value, key) => contents.push(key + " "));
+                }
+                else {
+                    contents.push(directoryFiles.get(props.currentDir)?.join(", "));
+                }
+
+                return <p className="response">{contents}</p>
             }
             break;
         
@@ -248,10 +259,8 @@ function ActionResponse(props: CommandType){
                 </div>
             )
         
-            case "rice":
-                
-
-                break;
+        case "rice":
+        break;
     }
 }
 
