@@ -1,12 +1,5 @@
-{
-  "homepage": "https://j-adia.github.io/resumeCLI/",
-  
+{  
   "dependencies": {
     "@types/react-dom": "^19.0.2"
-  },
-
-  "scripts": {
-    "build": "npm run build --prefix frontend",
-    "preview": "vite preview"
   }
 }
