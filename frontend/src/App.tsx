@@ -4,7 +4,8 @@ import CLI from "./pages/CLI";
 
 function App() {  
   return (
-    <BrowserRouter>
+    // important! router needs this so it knows where the routes are
+    <BrowserRouter basename="/resumeCLI/">
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/resume" element={<CLI/>}></Route>

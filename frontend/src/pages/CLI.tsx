@@ -1,10 +1,8 @@
 import CommandLine from "../components/CommandLine";
-import { useState } from 'react';
 import NavBar from '../components/NavBar';
 
 function CLI() {  
-  const [currentDir, setCurrentDir] = useState("");
-  setCurrentDir("");
+  const currentDir = "";
   
   return (
     <div className="CLI">
