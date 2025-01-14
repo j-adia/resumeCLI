@@ -194,7 +194,9 @@ function ActionResponse(props: CommandType){
             const contents = [];
             if (!commandSource){
                 if (props.currentDir === ""){
-                    directoryFiles.forEach((value, key) => contents.push(key + " "));
+                    directoryFiles.forEach((value, key) => {
+                        contents.push(key + " ");
+                        console.log(value)});
                 }
                 else {
                     contents.push(directoryFiles.get(props.currentDir)?.join(", "));

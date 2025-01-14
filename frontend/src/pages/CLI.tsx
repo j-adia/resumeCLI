@@ -4,7 +4,8 @@ import NavBar from '../components/NavBar';
 
 function CLI() {  
   const [currentDir, setCurrentDir] = useState("");
-
+  setCurrentDir("");
+  
   return (
     <div className="CLI">
       <NavBar />
