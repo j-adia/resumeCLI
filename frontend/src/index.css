@@ -109,6 +109,11 @@ a:visited { text-decoration: none; color:inherit}
 
 .blink {
   animation: blink 1s infinite;
+  height: 300px;
+}
+
+.blink > p {
+  margin-top: 40%;
 }
 
 @keyframes blink {

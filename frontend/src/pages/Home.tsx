@@ -26,7 +26,7 @@ function Home() {
       <Title />
       <LinkTab />
       {/* <Menu /> */}
-      <div className="blink" id="continue-button">PRESS ANY KEY TO CONTINUE...</div>
+      <div className="blink" id="continue-button"><p>PRESS ANY KEY TO CONTINUE...</p></div>
     </div>
   );
 }
