@@ -49,6 +49,14 @@ body {
 .title {
   padding: 20px;
   font-weight: bold;
+  font-size: 1.5vw;
+  margin-top: 60px;
+}
+
+@media screen and (min-width: 900px) {
+  .title {
+    font-size: 15px;
+  }
 }
 
 .links {

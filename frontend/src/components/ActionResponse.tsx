@@ -9,7 +9,7 @@ type CommandType = {
 const directoryFiles = new Map<string, string[]>([
     ['projects', ['Contact Manager', 'Notion Note Converter', 'Arduino Morse Code Translator', 'Record Player']],
     ['skills', ['C/C++', 'Python', 'Java', 'Javascript', 'Typescript', 'Git + Github', 'SQL', 'MongoDB', 'Excel', 'Docker', 'React', 'Flask']],
-    ['coursework', ['Processes for Object-Oriented Software Development', 'Computer Science II', 'Artificial Intelligence', 'Systems Software', 'Database Management Systems']],
+    ['coursework', ['Processes for Object-Oriented Software Development', 'Computer Science II', 'Artificial Intelligence', 'Systems Software', 'Database Management Systems']]
 ]);
 
 //├── └── │
@@ -71,53 +71,47 @@ function printTree(root: MenuItem){
     root.children.forEach(
         (e) => {
             if (count === size - 1){
-                trees.push(`└───── ${e.label}\n` + "\t");
+                trees.push(`└───── ${e.label}\n`);
             }
 
             else {
-                trees.push(
-                    `├───── ${e.label}\n`,
-                );
-
-                if (count === size - 1){
-                    trees.push("│\t└");
-                }
-                else if (count < size - 1){
-                    trees.push("│\t├");
-                }
-                else {
-                    trees.push("\t");
-                }
+                trees.push(`├───── ${e.label}\n`);
             }
             
             let count2 = 0;
             const size2 = e.children.length;
 
             // sub directories
-            e.children.forEach(
-                (b) => {
+            e.children.forEach((b) => {
+
                     if (size2 === 1){
                         trees.push(`└───── ${b.label}`);
                     }
+                    
+                    else if (count === size-1){
+                        if (count2 < size2 - 1){
+                            trees.push("\t├");
+                        }
+                        else {
+                            trees.push("\t└");
+                        }
+                        trees.push(`──── ${b.label}\n`);
+                    }
 
-                    else {
-                        trees.push(
-                            `───── ${b.label}\n`,
-                            );
-                
-                            if (count2 === size2 - 2){
-                                trees.push("│\t└");
-                            }
-                            else if (count2 !== size2 - 1){
+                    else {                
+                            if (count2 < size2 - 1){
                                 trees.push("│\t├");
                             }
-                            
+                            else {
+                                trees.push("│\t└");
+                            }
+                            trees.push(`───── ${b.label}\n`);
+
                     }
                     count2++;
-                }
-            )
-        }
-     );
+                });
+                count++;
+        });
 
     // don't forget join!
     return trees.join("");
