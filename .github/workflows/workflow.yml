@@ -36,9 +36,7 @@ jobs:
           node-version: 20
           cache: 'npm'
       - name: Install dependencies
-        run:
-          cd frontend 
-          npm ci 
+        run: cd frontend && npm ci 
       - name: Build
         run: 
           cd frontend
