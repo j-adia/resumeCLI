@@ -25,7 +25,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.github.io/resumeCLI/ }}
+      url: ${{steps.deployment.outputs.https://j-adia/github.io/resumeCLI}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
