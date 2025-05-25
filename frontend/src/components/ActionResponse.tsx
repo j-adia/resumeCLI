@@ -131,31 +131,31 @@ function ActionResponse(props: CommandType){
 
     switch(commandType){
         case "p":
-            return <p className="response">{directoryFiles.get("projects")?.join(", ")}</p>
+            return <p className="response">{directoryFiles.get("projects")?.join("\n")}</p>
         
         case "s":
-            return <p className="response">{directoryFiles.get("skills")?.join(", ")}</p>
+            return <p className="response">{directoryFiles.get("skills")?.join("\n")}</p>
 
         case "e":
-            return <p className="response">{directoryFiles.get("coursework")?.join(", ")}</p>
+            return <p className="response">{directoryFiles.get("coursework")?.join("\n")}</p>
 
         case "h":
             return (
                 <p className="response">
-                    Commands <br/>
+                    commands <br/>
                     --------- <br/>
-                    ` tree: list everything.<br/>
-                    ` cd {'<directory-name>'}: switch to directory.<br/>
-                    ` ls: list items in the current directory.<br/>
-                    ` clr: clear terminal.<br/>
-                    ` neofetch: my summary.<br/>
-                    ` rice: change terminal theme.<br/>
-                    ` open {'<url>'}: opens a url in a new tab.<br/>
-                    ` open linkedin: goes to my linkedin.<br/>
-                    ` open github: goes to my github.<br/>
-                    ` a: about.<br/>
-                    ` h: get help.<br/>
-                    ` exit: return to title screen.<br/>
+                     tree: list everything<br/>
+                    cd {'[directory-name]'}: switch directory<br/>
+                    ls: list items in the current directory<br/>
+                    clear: clear terminal<br/>
+                    neofetch: my summary<br/>
+                    rice: change terminal theme<br/>
+                    {/* ` open {'[url]'}: opens a url in a new tab.<br/> */}
+                    open linkedin: navigate to my linkedin<br/>
+                    open github: navigate to my github<br/>
+                    about: my bio<br/>
+                    h: get help<br/>
+                    exit: return to title screen<br/>
                 </p>
             ); 
 
@@ -169,18 +169,18 @@ function ActionResponse(props: CommandType){
 
             return;
         
-        case "a":
+        case "about":
             return (
                 <p className="response">
-                    welcome! i'm Jadia, a computer science student at the University of Central Florida. i'm an aspiring cloud software developer/dev-ops engineer.<br/><br/>
-                    I made this website so I could present my resume in a fun, unique way. so, if you're a human seeing this, I hope you enjoy!<br/><br/>
+                    Hello! i'm Jadia. I'm an aspiring cloud software developer/AI engineer.<br/><br/>
+                    I made this website so I could present my resume in a fun, unique way. <br/><br/>
                     if you've never used a command line terminal before, this is your beginner-friendly introduction!<br/><br/>
                     to start, list the sections of my resume with the 'ls' command. these are <i>directories</i>. to navigate to them, use 'cd {'[directory-name]'}'. or, 
                     you can just use the quick navigation commands at the top :)
                 </p>
             )
 
-        case "clr":
+        case "clear":
             window.location.reload();
             break;
         
@@ -255,7 +255,7 @@ function ActionResponse(props: CommandType){
                 </div>
             )
         
-        case "rice":
+        case "theme":
         break;
     }
 }
