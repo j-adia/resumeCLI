@@ -20,12 +20,12 @@ function CommandLine({ currentDir }: CommandLineProps) {
     e.preventDefault();
 
     const validDirectories = new Set(["", "projects", "coursework", "skills", ".."]);
-    const validCommands = new Set(["cd", "ls", "cat", "h", "a", "p", "e", "s", "clr", "exit", "tree", "neofetch", "open", "rice"]);
+    const validCommands = new Set(["cd", "ls", "cat", "h", "about", "p", "e", "s", "clear", "exit", "tree", "neofetch", "open", "theme"]);
     const [userCommand, ...args] = command.split(" ");
     let nextDir = "";
 
     if (!validCommands.has(userCommand)) {
-      setError(`Error: command '${userCommand}' not found (enter 'h' for help)`);
+      setError(`Error: command '${userCommand}' not found (enter '-h' for help)`);
     } 
 
     else if (args.length > 1){
